@@ -24,14 +24,16 @@ class LtsmRotateAnimationView extends StatefulWidget {
                 //TODO:
                 //jika animate == true, atur derajat rotasinya menjadi 90
                 //jika animate == false, atur opacity menjadi 0
-                turns: 15 / 360,
+                turns: controller.animate ? 90 / 360 : 0 / 360,
                 duration: const Duration(milliseconds: 2000),
                 child: Container(
                   height: 100.0,
                   width: 100.0,
                   margin: const EdgeInsets.only(),
                   decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(1.0),
+                    color: controller.animate
+                        ? Colors.red.withOpacity(1.0)
+                        : Colors.red.withOpacity(0),
                     borderRadius: const BorderRadius.all(
                       Radius.circular(
                         16.0,
@@ -53,7 +55,10 @@ class LtsmRotateAnimationView extends StatefulWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueGrey,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  controller.animate = !controller.animate;
+                  controller.setState(() {});
+                },
               ),
             ],
           ),
